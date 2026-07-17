@@ -1,0 +1,16 @@
+# dependencies
+node_modules/
+
+# build output
+dist/
+.astro/
+
+# local logs
+*.log
+.codex-preview.log
+
+# editor and OS files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

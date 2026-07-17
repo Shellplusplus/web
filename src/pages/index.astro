@@ -1,0 +1,368 @@
+---
+import "../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+const basePath = base.endsWith("/") ? base : `${base}/`;
+const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Shell++ 是面向 Xiaomi Vela 手环（表）的开源工具链，连接 Quick App、Lua 后端、Android 配套应用与 AstroBoxV2 插件。"
+    />
+    <title>Shell++ · Vela 手环（表）工具链</title>
+    <link
+      id="site-favicon"
+      rel="icon"
+      type="image/png"
+      href={withBase("assets/brand-icon-light.png")}
+      data-light-href={withBase("assets/brand-icon-light.png")}
+      data-dark-href={withBase("assets/brand-icon-dark.png")}
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand-lockup" href="#top" aria-label="Shell++">
+          <img
+            class="brand-mark"
+            id="brand-mark"
+            src={withBase("assets/brand-icon-light.png")}
+            data-light-src={withBase("assets/brand-icon-light.png")}
+            data-dark-src={withBase("assets/brand-icon-dark.png")}
+            alt="Shell++ 图标"
+          />
+          <span>Shell++</span>
+        </a>
+        <nav class="topnav" aria-label="主导航">
+          <a href="#stack">架构</a>
+          <a href="#compatibility">兼容</a>
+          <a href="#release">下载</a>
+          <a href="#team">团队</a>
+        </nav>
+        <a
+          class="icon-button github-link"
+          href="https://github.com/DefateStar/public-shellpp/releases/latest"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="下载最新版本"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="github-mark">
+            <path
+              d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.63.07-.63 1 .07 1.52 1.05 1.52 1.05.88 1.56 2.32 1.11 2.89.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.15-4.55-5.11 0-1.13.39-2.06 1.03-2.79-.1-.26-.45-1.31.1-2.74 0 0 .84-.28 2.75 1.07A9.3 9.3 0 0 1 12 6.8c.85 0 1.7.12 2.49.36 1.9-1.35 2.74-1.07 2.74-1.07.55 1.43.21 2.48.11 2.74.64.73 1.03 1.66 1.03 2.79 0 3.97-2.34 4.84-4.57 5.1.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"
+            />
+          </svg>
+        </a>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v2.5M12 18.5V21M5.64 5.64l1.77 1.77M16.59 16.59l1.77 1.77M3 12h2.5M18.5 12H21M5.64 18.36l1.77-1.77M16.59 7.41l1.77-1.77M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+          </svg>
+        </button>
+      </header>
+
+      <section class="page-hero" id="top">
+        <div class="pattern" aria-hidden="true">
+          <div class="pattern-row"><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b></div>
+          <div class="pattern-row"><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b></div>
+          <div class="pattern-row"><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b></div>
+          <div class="pattern-row"><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b><b>SHELL++</b></div>
+        </div>
+        <p class="section-number">01</p>
+        <div class="hero-main">
+          <h1>Shell++</h1>
+          <p class="hero-copy">
+            你的玩环好助手。把终端、截图、设备信息、文件查看和主机连接整理到一条清晰流程里，让手环（表）的日常调试与维护更顺手。
+          </p>
+        </div>
+        <aside class="hero-side">
+          <div class="hero-card hero-card-primary">
+            <span class="label">What It Is</span>
+            <strong>从手环（表）到主机的控制面</strong>
+            <p>Shell++ 不只是一款 Android 配套 App，而是把设备交互、文件 IPC、截图传输和远程工具串成一条可追踪的工作流。</p>
+          </div>
+          <div class="hero-mini-grid">
+            <div class="hero-card">
+              <span class="label">Core Flow</span>
+              <strong>截图、终端与设备维护</strong>
+            </div>
+            <div class="hero-card">
+              <span class="label">Experience</span>
+              <strong>Watch-first workflow</strong>
+            </div>
+          </div>
+        </aside>
+      </section>
+
+      <main class="content">
+        <section class="architecture-grid" id="stack" aria-label="Shell++ 三端架构">
+          <article class="architecture-card architecture-card-watch">
+            <span class="row-index">01 / WATCH</span>
+            <h2>Quick App</h2>
+            <p>手环（表）端的交互入口。负责终端、截图、状态、设备信息、文件查看与显示工具页面。</p>
+            <div class="architecture-meta"><code>com.shell.liangyi</code><span>Vela UX</span></div>
+          </article>
+          <article class="architecture-card architecture-card-lua">
+            <span class="row-index">02 / BACKEND</span>
+            <h2>Lua backend</h2>
+            <p>运行在手环（表）侧的执行与设备逻辑。负责截图、心跳、安全令牌、缓存和应用管理等后端动作。</p>
+            <div class="architecture-meta"><code>file IPC</code><span>LVGL</span></div>
+          </article>
+          <article class="architecture-card architecture-card-host">
+            <span class="row-index">03 / HOST</span>
+            <h2>Android、Astrobox插件</h2>
+            <p>主机侧的两种工作面：Android 提供完整伴侣应用，AstroBoxV2 插件提供桌面连接、截图和日志面板。</p>
+            <div class="architecture-meta"><code>Interconnect</code><span>HTTP / Fetch</span></div>
+          </article>
+        </section>
+
+        <section class="panel" id="compatibility">
+          <div class="panel-heading compact">
+            <p class="section-number">02</p>
+            <div>
+              <h2>兼容性支持。</h2>
+              <p>不同机型的系统、屏幕和截图接口存在差异，以下是当前 Shell++ 的实际适配范围。</p>
+            </div>
+          </div>
+          <div class="compatibility-grid">
+            <div class="compatibility-column">
+              <div class="compatibility-row">
+                <strong>小米手环8</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手环9</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手环10</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手环8Pro</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手环9Pro</strong>
+                <span class="compatibility-status supported">完整支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手环10Pro</strong>
+                <span class="compatibility-status supported">完整支持</span>
+              </div>
+            </div>
+            <div class="compatibility-column">
+              <div class="compatibility-row">
+                <strong>小米手表S3</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手表S4</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>小米手表S5</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>红米手表6</strong>
+                <span class="compatibility-status supported">完整支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>红米手表4</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+              <div class="compatibility-row">
+                <strong>红米手表5</strong>
+                <span class="compatibility-status unsupported">不支持</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel" id="release">
+          <div class="panel-heading compact">
+            <p class="section-number">03</p>
+            <div>
+              <h2>想快速获取构建？</h2>
+              <p>
+                下载信息已经独立到专门页面，版本入口、平台说明和设备兼容性可以更方便地分享给需要的人。
+              </p>
+            </div>
+          </div>
+          <div class="release-grid">
+            <article class="release-card release-card-bandburg">
+              <p>
+                新的下载页集中整理最新版本入口、源码链接、支持平台和当前设备适配列表。
+              </p>
+              <a class="primary-action release-link" href={withBase("download/")}>前去下载</a>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="team">
+          <div class="panel-heading compact">
+            <p class="section-number">04</p>
+            <div>
+              <h2>Shell++ 团队</h2>
+              <p>Shell++ 的诞生永远离不开团队背后的每一位成员，我们在此感谢所有参与 Shell++ 项目的贡献者。</p>
+            </div>
+          </div>
+          <div class="developer-grid">
+            <div class="developer-card">
+              <img class="developer-avatar" src={withBase("assets/developers/azumachiaki.jpg")} alt="AzumaChiaki avatar" />
+              <strong>AzumaChiaki</strong>
+              <span>Developer</span>
+            </div>
+            <div class="developer-card">
+              <img class="developer-avatar" src={withBase("assets/developers/ikun.png")} alt="IKUN-CXKPRO avatar" />
+              <strong>IKUN-CXKPRO</strong>
+              <span>Developer</span>
+            </div>
+            <div class="developer-card">
+              <img class="developer-avatar" src={withBase("assets/developers/liangyi.jpg")} alt="LiangYi avatar" />
+              <strong>LiangYi</strong>
+              <span>Developer</span>
+            </div>
+            <div class="developer-card">
+              <img class="developer-avatar" src={withBase("assets/developers/defatestar.png")} alt="DefateStar avatar" />
+              <strong>DefateStar</strong>
+              <span>Developer</span>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Shell++</p>
+        <p>Open toolchain for Xiaomi Vela watch workflows.</p>
+        <p id="footer-year">© 2026 Shell++</p>
+      </footer>
+    </div>
+
+    <script is:inline src={withBase("scripts/reveal.js")}></script>
+    <script is:inline src={withBase("scripts/cursor-glint.js")}></script>
+    <script is:inline src={withBase("scripts/anchor-focus.js")}></script>
+    <script is:inline src={withBase("scripts/external-link-dialog.js")}></script>
+    <script is:inline>
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const footerYear = document.getElementById("footer-year");
+      const brandMark = document.getElementById("brand-mark");
+      const siteFavicon = document.getElementById("site-favicon");
+      const storedTheme = window.localStorage.getItem("shellpp-site-theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      let isThemeTransitioning = false;
+
+      function applyTheme(theme) {
+        const isDark = theme === "dark";
+        if (isDark) {
+          root.dataset.theme = "dark";
+        } else {
+          delete root.dataset.theme;
+        }
+        themeToggle?.setAttribute("aria-pressed", isDark ? "true" : "false");
+
+        if (brandMark) {
+          brandMark.src = isDark ? brandMark.dataset.darkSrc : brandMark.dataset.lightSrc;
+        }
+
+        if (siteFavicon) {
+          siteFavicon.href = isDark ? siteFavicon.dataset.darkHref : siteFavicon.dataset.lightHref;
+        }
+      }
+
+      const initialTheme = storedTheme || (prefersDark.matches ? "dark" : "light");
+      applyTheme(initialTheme);
+
+      function setStoredTheme(theme) {
+        applyTheme(theme);
+        window.localStorage.setItem("shellpp-site-theme", theme);
+      }
+
+      themeToggle?.addEventListener("click", () => {
+        if (isThemeTransitioning) {
+          return;
+        }
+
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!document.startViewTransition || reduceMotion) {
+          setStoredTheme(nextTheme);
+          return;
+        }
+
+        const rect = themeToggle.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const viewportWidth = Math.max(
+          window.innerWidth,
+          document.documentElement.clientWidth,
+          window.visualViewport?.width || 0,
+        );
+        const viewportHeight = Math.max(
+          window.innerHeight,
+          document.documentElement.clientHeight,
+          window.visualViewport?.height || 0,
+        );
+        const endRadius =
+          Math.hypot(Math.max(x, viewportWidth - x), Math.max(y, viewportHeight - y)) * 1.18 + 96;
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+
+        isThemeTransitioning = true;
+        root.classList.add("is-theme-transitioning");
+
+        try {
+          const transition = document.startViewTransition(() => {
+            setStoredTheme(nextTheme);
+          });
+
+          transition.ready
+            .then(() => {
+              document.documentElement.animate(
+                {
+                  clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
+                },
+                {
+                  duration: 680,
+                  easing: "cubic-bezier(0.2, 0.72, 0.18, 1)",
+                  fill: "both",
+                  pseudoElement: "::view-transition-new(root)",
+                },
+              );
+            })
+            .catch(() => {});
+
+          transition.finished
+            .catch(() => {})
+            .finally(() => {
+              window.scrollTo(scrollX, scrollY);
+              root.classList.remove("is-theme-transitioning");
+              isThemeTransitioning = false;
+            });
+        } catch {
+          setStoredTheme(nextTheme);
+          root.classList.remove("is-theme-transitioning");
+          isThemeTransitioning = false;
+        }
+      });
+
+      prefersDark.addEventListener("change", (event) => {
+        if (window.localStorage.getItem("shellpp-site-theme")) {
+          return;
+        }
+        applyTheme(event.matches ? "dark" : "light");
+      });
+
+      if (footerYear) {
+        footerYear.textContent = `© ${new Date().getFullYear()} Shell++`;
+      }
+    </script>
+  </body>
+</html>

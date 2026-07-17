@@ -1,0 +1,633 @@
+---
+import "../styles/global.css";
+
+const base = import.meta.env.BASE_URL;
+const basePath = base.endsWith("/") ? base : `${base}/`;
+const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
+---
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Shell++ 下载页，集中提供 Android 端、手环端 Quick App 与 AstroBox 插件下载。"
+    />
+    <title>Shell++ 下载页</title>
+    <link
+      id="site-favicon"
+      rel="icon"
+      type="image/png"
+      href={withBase("assets/brand-icon-light.png")}
+      data-light-href={withBase("assets/brand-icon-light.png")}
+      data-dark-href={withBase("assets/brand-icon-dark.png")}
+    />
+  </head>
+  <body>
+    <div class="app-shell download-page">
+      <header class="topbar">
+        <a class="brand-lockup" href={basePath} aria-label="Shell++">
+          <img
+            class="brand-mark"
+            id="brand-mark"
+            src={withBase("assets/brand-icon-light.png")}
+            data-light-src={withBase("assets/brand-icon-light.png")}
+            data-dark-src={withBase("assets/brand-icon-dark.png")}
+            alt="Shell++ 图标"
+          />
+          <span>Shell++</span>
+        </a>
+        <nav class="topnav" aria-label="下载页导航">
+          <a href={basePath}>首页</a>
+          <a href="#download-stage">下载选择</a>
+          <a href="#platform-cards">平台卡片</a>
+        </nav>
+        <a
+          class="icon-button github-link"
+          href="https://github.com/DefateStar/public-shellpp/releases/latest"
+          target="_blank"
+          rel="noreferrer"
+          aria-label="打开最新版本发布页"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true" class="github-mark">
+            <path
+              d="M12 2C6.48 2 2 6.58 2 12.24c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.89-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.49-1.11-1.49-.9-.64.07-.63.07-.63 1 .07 1.52 1.05 1.52 1.05.88 1.56 2.32 1.11 2.89.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.15-4.55-5.11 0-1.13.39-2.06 1.03-2.79-.1-.26-.45-1.31.1-2.74 0 0 .84-.28 2.75 1.07A9.3 9.3 0 0 1 12 6.8c.85 0 1.7.12 2.49.36 1.9-1.35 2.74-1.07 2.74-1.07.55 1.43.21 2.48.11 2.74.64.73 1.03 1.66 1.03 2.79 0 3.97-2.34 4.84-4.57 5.1.36.32.68.95.68 1.92 0 1.39-.01 2.51-.01 2.85 0 .27.18.6.69.49A10.24 10.24 0 0 0 22 12.24C22 6.58 17.52 2 12 2Z"
+            />
+          </svg>
+        </a>
+        <button class="icon-button" id="theme-toggle" type="button" aria-label="切换主题" aria-pressed="false">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3v2.5M12 18.5V21M5.64 5.64l1.77 1.77M16.59 16.59l1.77 1.77M3 12h2.5M18.5 12H21M5.64 18.36l1.77-1.77M16.59 7.41l1.77-1.77M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" />
+          </svg>
+        </button>
+      </header>
+
+      <main class="download-content">
+        <section class="download-stage" id="download-stage" aria-label="Shell++ 平台下载选择">
+          <div class="download-stage-header">
+            <p class="section-number">01</p>
+            <div>
+              <h1>Shell++ Download</h1>
+              <p>左右切换以更换平台下载链接</p>
+              <p class="mobile-download-tip">Tips：下滑能找到切换平台的按钮</p>
+            </div>
+          </div>
+
+          <div class="download-switcher" data-download-switcher>
+            <button class="download-arrow" type="button" data-slide-prev aria-label="上一个平台">
+              <span aria-hidden="true">←</span>
+            </button>
+
+            <div class="download-slider" aria-live="polite">
+              <article class="download-slide is-active" data-slide="overview">
+                <div class="download-preview">
+                  <img src={withBase("assets/download/overview.png")} alt="Shell++ 三端总览预览" />
+                </div>
+                <div class="download-detail">
+                  <section class="download-intro-panel">
+                    <span class="row-index">00 / OVERVIEW</span>
+                    <h2>三端下载链接</h2>
+                    <p>
+                      如果你是第一次安装 Shell++，建议从总览开始：Android 配套应用或 AstroBox 插件、
+                      手环端 Quick App 分别安装，才能形成完整工作流。
+                    </p>
+                  </section>
+                  <section class="download-action-panel">
+                    <span class="label">Download</span>
+                    <div class="download-link-stack">
+                      <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">Android 端</a>
+                      <a class="line-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">手环端</a>
+                      <a class="line-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">AstroBox 插件</a>
+                    </div>
+                  </section>
+                </div>
+              </article>
+
+              <article class="download-slide" data-slide="android">
+                <div class="download-preview download-preview-phone">
+                  <img src={withBase("assets/download/android.png")} alt="Shell++ Android 端预览" />
+                </div>
+                <div class="download-detail">
+                  <section class="download-intro-panel">
+                    <span class="row-index">01 / ANDROID</span>
+                    <h2>Android 配套应用</h2>
+                    <p>
+                      手机端负责设备连接、截图同步、传输状态、文件查看与更新检查，是日常使用 Shell++
+                      时最主要的入口。
+                    </p>
+                  </section>
+                  <section class="download-action-panel">
+                    <span class="label">Download</span>
+                    <h3>下载 Android APK</h3>
+                    <p>前往最新 Release 下载 Android 安装包，并查看本次版本说明。</p>
+                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                  </section>
+                </div>
+              </article>
+
+              <article class="download-slide" data-slide="watch">
+                <div class="download-preview download-preview-watch">
+                  <img src={withBase("assets/download/watch.png")} alt="Shell++ 手环端预览" />
+                </div>
+                <div class="download-detail">
+                  <section class="download-intro-panel">
+                    <span class="row-index">02 / WATCH</span>
+                    <h2>手环端 Quick App</h2>
+                    <p>
+                      手环端承担截图、终端、设备信息、状态展示和部分设备侧工具，是 Shell++ 在 Vela
+                      设备上的交互入口。
+                    </p>
+                  </section>
+                  <section class="download-action-panel">
+                    <span class="label">Download</span>
+                    <h3>下载手环端包</h3>
+                    <p>从最新 Release 获取手环端资源，配合 Android 端完成安装和连接。</p>
+                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                  </section>
+                </div>
+              </article>
+
+              <article class="download-slide" data-slide="astrobox">
+                <div class="download-preview download-preview-desktop">
+                  <img src={withBase("assets/download/astrobox.png")} alt="Shell++ AstroBox 插件预览" />
+                </div>
+                <div class="download-detail">
+                  <section class="download-intro-panel">
+                    <span class="row-index">03 / ASTROBOX</span>
+                    <h2>AstroBoxV2 插件</h2>
+                    <p>
+                      桌面端插件面向调试和维护场景，聚合设备连接、截图选择、传输进度和日志面板。
+                    </p>
+                  </section>
+                  <section class="download-action-panel">
+                    <span class="label">Download</span>
+                    <h3>下载 AstroBox 插件</h3>
+                    <p>从最新 Release 获取插件资源，适合开发和桌面维护流程。</p>
+                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                  </section>
+                </div>
+              </article>
+            </div>
+
+            <button class="download-arrow" type="button" data-slide-next aria-label="下一个平台">
+              <span aria-hidden="true">→</span>
+            </button>
+          </div>
+        </section>
+
+        <section class="download-platform-strip" id="platform-cards" aria-label="平台快速切换">
+          <button class="architecture-card architecture-card-host download-platform-card is-active" type="button" data-platform-card="overview">
+            <span class="row-index">00 / ALL</span>
+            <h2>总览</h2>
+            <p>一次查看 Android、手环端与 AstroBox 插件的下载入口。</p>
+            <div class="architecture-meta"><code>All packages</code><span>Start here</span></div>
+          </button>
+          <button class="architecture-card architecture-card-host download-platform-card" type="button" data-platform-card="android">
+            <span class="row-index">01 / ANDROID</span>
+            <h2>Android</h2>
+            <p>连接设备、同步截图、管理文件和处理日常使用状态。</p>
+            <div class="architecture-meta"><code>APK</code><span>Phone app</span></div>
+          </button>
+          <button class="architecture-card architecture-card-watch download-platform-card" type="button" data-platform-card="watch">
+            <span class="row-index">02 / WATCH</span>
+            <h2>Quick App</h2>
+            <p>手环侧交互入口，负责设备侧操作和 Vela 工作流。</p>
+            <div class="architecture-meta"><code>Vela</code><span>Watch side</span></div>
+          </button>
+          <button class="architecture-card architecture-card-lua download-platform-card" type="button" data-platform-card="astrobox">
+            <span class="row-index">03 / PLUGIN</span>
+            <h2>AstroBox</h2>
+            <p>桌面插件入口，用于调试、截图传输和日志观察。</p>
+            <div class="architecture-meta"><code>ABV2</code><span>Desktop</span></div>
+          </button>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <p>Shell++</p>
+        <p>Download hub for Android, Vela Quick App, and AstroBoxV2 plugin.</p>
+        <p id="footer-year">© 2026 Shell++</p>
+      </footer>
+
+      <dialog class="download-disclaimer-dialog" id="download-disclaimer-dialog" aria-labelledby="download-disclaimer-title">
+        <div class="download-disclaimer-panel">
+          <span class="row-index">DISCLAIMER</span>
+          <h2 id="download-disclaimer-title">软件免责声明</h2>
+          <div class="download-disclaimer-copy" data-disclaimer-copy tabindex="0">
+            <section>
+              <h3>一、软件免责声明</h3>
+              <p>重要提示：在使用 Shell++ 及其相关功能前，请务必仔细阅读本声明。您一旦安装、启动或使用本软件，即视为已充分理解并同意接受本声明的全部内容。</p>
+              <h3>风险告知</h3>
+              <p>本软件面向 Xiaomi Vela 设备的调试、维护与辅助使用场景。除截图功能外，本软件提供的终端、命令执行、文件操作、设备信息读取、连接调试、状态控制、插件交互及其他高级功能，均可能对设备系统、数据、运行状态或硬件产生影响，并存在一定风险。</p>
+            </section>
+            <section>
+              <h3>二、不可逆损害风险</h3>
+              <p>您在使用本软件过程中执行的任何操作，尤其是调试命令、系统参数修改、文件读写、设备控制、应用管理及其他非普通截图类操作，均可能导致系统异常、功能失效、数据丢失、设备无法正常启动、硬件异常运行，甚至造成不可逆转的设备损害。</p>
+            </section>
+            <section>
+              <h3>三、责任免除</h3>
+              <p>开发者、维护者、贡献者及相关团队不对您因使用本软件而产生的任何后果承担责任。无论该后果是否由误操作、不当使用、理解偏差、设备环境差异、软件缺陷或第三方组件引起，开发者均不承担任何形式的法律责任、赔偿责任、维修责任或数据恢复责任。</p>
+            </section>
+            <section>
+              <h3>四、用户责任</h3>
+              <p>请您在执行任何操作前自行判断风险，并确认您已理解该操作可能造成的影响。如您不具备相应技术能力，或无法承担设备损坏、数据丢失及其他后果，请勿使用除截图外的高风险功能。因您的操作导致设备出现任何问题，均由您自行承担全部责任。</p>
+            </section>
+            <section>
+              <h3>五、无担保声明</h3>
+              <p>本软件按“现状”提供，不作任何明示或暗示的保证，包括但不限于稳定性、安全性、兼容性、适用于特定用途、不会造成设备异常或不会导致数据损失等保证。</p>
+            </section>
+            <section>
+              <h3>六、继续使用</h3>
+              <p>如果您不同意本声明中的任何内容，请立即停止使用本软件。继续使用即表示您已知悉风险，并愿意自行承担由此产生的一切后果。</p>
+            </section>
+          </div>
+          <div class="download-disclaimer-actions">
+            <a class="line-action" href={basePath} data-disclaimer-home>返回首页</a>
+            <button
+              class="primary-action disclaimer-progress-button"
+              type="button"
+              data-disclaimer-accept
+              disabled
+            >
+              <span data-disclaimer-label>开始阅读</span>
+            </button>
+          </div>
+        </div>
+      </dialog>
+
+    </div>
+
+    <script is:inline src={withBase("scripts/reveal.js")}></script>
+    <script is:inline src={withBase("scripts/cursor-glint.js")}></script>
+    <script is:inline src={withBase("scripts/anchor-focus.js")}></script>
+    <script is:inline src={withBase("scripts/external-link-dialog.js")}></script>
+    <script is:inline>
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("theme-toggle");
+      const footerYear = document.getElementById("footer-year");
+      const brandMark = document.getElementById("brand-mark");
+      const siteFavicon = document.getElementById("site-favicon");
+      const storedTheme = window.localStorage.getItem("shellpp-site-theme");
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)");
+      const switcher = document.querySelector("[data-download-switcher]");
+      const slider = switcher?.querySelector(".download-slider");
+      const slides = Array.from(document.querySelectorAll("[data-slide]"));
+      const cards = Array.from(document.querySelectorAll("[data-platform-card]"));
+      const disclaimerDialog = document.getElementById("download-disclaimer-dialog");
+      const disclaimerAccept = disclaimerDialog?.querySelector("[data-disclaimer-accept]");
+      const disclaimerCopy = disclaimerDialog?.querySelector("[data-disclaimer-copy]");
+      const disclaimerLabel = disclaimerDialog?.querySelector("[data-disclaimer-label]");
+      const disclaimerHome = disclaimerDialog?.querySelector("[data-disclaimer-home]");
+      const disclaimerStorageKey = "shellpp-download-disclaimer-accepted-v2";
+      const disclaimerDelayMs = 5000;
+      let disclaimerReadProgress = 0;
+      let disclaimerCountdownStarted = false;
+      let disclaimerCountdownFinished = false;
+      let disclaimerCountdownEndsAt = 0;
+      let disclaimerTimer = 0;
+      let isThemeTransitioning = false;
+      let slidePointerStartX = 0;
+      let slidePointerStartY = 0;
+      let slidePointerId = null;
+      let activeSlide = Math.max(0, slides.findIndex((slide) => slide.classList.contains("is-active")));
+
+      function applyTheme(theme) {
+        const isDark = theme === "dark";
+        if (isDark) {
+          root.dataset.theme = "dark";
+        } else {
+          delete root.dataset.theme;
+        }
+        themeToggle?.setAttribute("aria-pressed", isDark ? "true" : "false");
+
+        if (brandMark) {
+          brandMark.src = isDark ? brandMark.dataset.darkSrc : brandMark.dataset.lightSrc;
+        }
+
+        if (siteFavicon) {
+          siteFavicon.href = isDark ? siteFavicon.dataset.darkHref : siteFavicon.dataset.lightHref;
+        }
+      }
+
+      function setActiveSlide(nextIndex, direction = "next") {
+        const previousSlide = activeSlide;
+        const normalizedIndex = (nextIndex + slides.length) % slides.length;
+
+        if (normalizedIndex !== previousSlide && direction !== "none") {
+          switcher?.classList.remove("is-slide-next", "is-slide-prev", "is-slide-animating");
+          void switcher?.offsetWidth;
+          switcher?.classList.add("is-slide-animating", direction === "prev" ? "is-slide-prev" : "is-slide-next");
+          window.setTimeout(() => {
+            switcher?.classList.remove("is-slide-next", "is-slide-prev", "is-slide-animating");
+          }, 520);
+        }
+
+        activeSlide = normalizedIndex;
+        const activeKey = slides[activeSlide]?.dataset.slide;
+
+        slides.forEach((slide, index) => {
+          slide.classList.toggle("is-active", index === activeSlide);
+        });
+
+        cards.forEach((card) => {
+          const isActive = card.dataset.platformCard === activeKey;
+          card.classList.toggle("is-active", isActive);
+          card.setAttribute("aria-pressed", isActive ? "true" : "false");
+        });
+      }
+
+      const initialTheme = storedTheme || (prefersDark.matches ? "dark" : "light");
+      applyTheme(initialTheme);
+      setActiveSlide(activeSlide, "none");
+
+      function closeDisclaimerDialog() {
+        if (!(disclaimerDialog instanceof HTMLDialogElement) || !disclaimerDialog.open) {
+          return;
+        }
+
+        disclaimerDialog.classList.add("is-closing");
+        window.clearInterval(disclaimerTimer);
+        window.setTimeout(() => {
+          disclaimerDialog.close();
+          disclaimerDialog.classList.remove("is-closing");
+          document.body.classList.remove("has-native-dialog-cursor");
+        }, 180);
+      }
+
+      function getDisclaimerProgress() {
+        if (!(disclaimerCopy instanceof HTMLElement)) {
+          return 1;
+        }
+
+        const maxScroll = disclaimerCopy.scrollHeight - disclaimerCopy.clientHeight;
+        if (maxScroll <= 2) {
+          return 1;
+        }
+
+        return Math.min(1, Math.max(0, disclaimerCopy.scrollTop / maxScroll));
+      }
+
+      function updateDisclaimerButton() {
+        if (!(disclaimerAccept instanceof HTMLButtonElement)) {
+          return;
+        }
+
+        const progressPercent = `${Math.round(disclaimerReadProgress * 100)}%`;
+        disclaimerAccept.style.setProperty("--disclaimer-progress", progressPercent);
+
+        const isReadComplete = disclaimerReadProgress >= 0.995;
+        const remainingSeconds = Math.max(0, Math.ceil((disclaimerCountdownEndsAt - Date.now()) / 1000));
+        const canContinue = isReadComplete && disclaimerCountdownFinished;
+        disclaimerAccept.disabled = !canContinue;
+
+        if (!(disclaimerLabel instanceof HTMLElement)) {
+          return;
+        }
+
+        if (!disclaimerCountdownStarted) {
+          disclaimerLabel.textContent = "向下阅读以开始";
+          return;
+        }
+
+        if (!isReadComplete) {
+          disclaimerLabel.textContent = "请阅读至底部";
+          return;
+        }
+
+        disclaimerLabel.textContent = canContinue ? "我已知悉并继续" : `还有 ${remainingSeconds} 秒`;
+      }
+
+      function startDisclaimerCountdown() {
+        if (disclaimerCountdownStarted) {
+          return;
+        }
+
+        disclaimerCountdownStarted = true;
+        disclaimerCountdownFinished = false;
+        disclaimerCountdownEndsAt = Date.now() + disclaimerDelayMs;
+        disclaimerTimer = window.setInterval(() => {
+          if (Date.now() >= disclaimerCountdownEndsAt) {
+            disclaimerCountdownFinished = true;
+            window.clearInterval(disclaimerTimer);
+          }
+          updateDisclaimerButton();
+        }, 120);
+        updateDisclaimerButton();
+      }
+
+      function updateDisclaimerProgress() {
+        disclaimerReadProgress = getDisclaimerProgress();
+        updateDisclaimerButton();
+      }
+
+      function openDisclaimerDialog() {
+        if (!(disclaimerDialog instanceof HTMLDialogElement)) {
+          return;
+        }
+
+        document.body.classList.add("has-native-dialog-cursor");
+        disclaimerDialog.showModal();
+        updateDisclaimerProgress();
+        disclaimerCopy?.focus?.();
+      }
+
+      if (
+        disclaimerDialog instanceof HTMLDialogElement &&
+        window.localStorage.getItem(disclaimerStorageKey) !== "true"
+      ) {
+        window.setTimeout(() => {
+          openDisclaimerDialog();
+        }, 420);
+      }
+
+      disclaimerDialog?.addEventListener("cancel", (event) => {
+        event.preventDefault();
+      });
+
+      disclaimerCopy?.addEventListener(
+        "wheel",
+        (event) => {
+          if (event.deltaY > 0) {
+            startDisclaimerCountdown();
+          }
+        },
+        { passive: true },
+      );
+
+      disclaimerCopy?.addEventListener(
+        "touchmove",
+        () => {
+          startDisclaimerCountdown();
+        },
+        { passive: true },
+      );
+
+      disclaimerCopy?.addEventListener("scroll", () => {
+        if (disclaimerCopy instanceof HTMLElement && disclaimerCopy.scrollTop > 0) {
+          startDisclaimerCountdown();
+        }
+        updateDisclaimerProgress();
+      });
+
+      disclaimerAccept?.addEventListener("click", () => {
+        if (!(disclaimerAccept instanceof HTMLButtonElement) || disclaimerAccept.disabled) {
+          return;
+        }
+        window.localStorage.setItem(disclaimerStorageKey, "true");
+        closeDisclaimerDialog();
+      });
+
+      disclaimerHome?.addEventListener("click", (event) => {
+        event.preventDefault();
+        window.location.href = disclaimerHome.getAttribute("href") || "/";
+      });
+
+      function setStoredTheme(theme) {
+        applyTheme(theme);
+        window.localStorage.setItem("shellpp-site-theme", theme);
+      }
+
+      themeToggle?.addEventListener("click", () => {
+        if (isThemeTransitioning) {
+          return;
+        }
+
+        const nextTheme = root.dataset.theme === "dark" ? "light" : "dark";
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        if (!document.startViewTransition || reduceMotion) {
+          setStoredTheme(nextTheme);
+          return;
+        }
+
+        const rect = themeToggle.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+        const viewportWidth = Math.max(
+          window.innerWidth,
+          document.documentElement.clientWidth,
+          window.visualViewport?.width || 0,
+        );
+        const viewportHeight = Math.max(
+          window.innerHeight,
+          document.documentElement.clientHeight,
+          window.visualViewport?.height || 0,
+        );
+        const endRadius =
+          Math.hypot(Math.max(x, viewportWidth - x), Math.max(y, viewportHeight - y)) * 1.18 + 96;
+        const scrollX = window.scrollX;
+        const scrollY = window.scrollY;
+
+        isThemeTransitioning = true;
+        root.classList.add("is-theme-transitioning");
+
+        try {
+          const transition = document.startViewTransition(() => {
+            setStoredTheme(nextTheme);
+          });
+
+          transition.ready
+            .then(() => {
+              document.documentElement.animate(
+                {
+                  clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${endRadius}px at ${x}px ${y}px)`],
+                },
+                {
+                  duration: 680,
+                  easing: "cubic-bezier(0.2, 0.72, 0.18, 1)",
+                  fill: "both",
+                  pseudoElement: "::view-transition-new(root)",
+                },
+              );
+            })
+            .catch(() => {});
+
+          transition.finished
+            .catch(() => {})
+            .finally(() => {
+              window.scrollTo(scrollX, scrollY);
+              root.classList.remove("is-theme-transitioning");
+              isThemeTransitioning = false;
+            });
+        } catch {
+          setStoredTheme(nextTheme);
+          root.classList.remove("is-theme-transitioning");
+          isThemeTransitioning = false;
+        }
+      });
+
+      prefersDark.addEventListener("change", (event) => {
+        if (window.localStorage.getItem("shellpp-site-theme")) {
+          return;
+        }
+        applyTheme(event.matches ? "dark" : "light");
+      });
+
+      switcher?.querySelector("[data-slide-prev]")?.addEventListener("click", () => {
+        setActiveSlide(activeSlide - 1, "prev");
+      });
+
+      switcher?.querySelector("[data-slide-next]")?.addEventListener("click", () => {
+        setActiveSlide(activeSlide + 1, "next");
+      });
+
+      slider?.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse") {
+          return;
+        }
+
+        slidePointerId = event.pointerId;
+        slidePointerStartX = event.clientX;
+        slidePointerStartY = event.clientY;
+      });
+
+      slider?.addEventListener("pointerup", (event) => {
+        if (slidePointerId !== event.pointerId) {
+          return;
+        }
+
+        const deltaX = event.clientX - slidePointerStartX;
+        const deltaY = event.clientY - slidePointerStartY;
+        slidePointerId = null;
+
+        if (Math.abs(deltaX) < 48 || Math.abs(deltaX) < Math.abs(deltaY) * 1.2) {
+          return;
+        }
+
+        setActiveSlide(activeSlide + (deltaX < 0 ? 1 : -1), deltaX < 0 ? "next" : "prev");
+      });
+
+      slider?.addEventListener("pointercancel", () => {
+        slidePointerId = null;
+      });
+
+      cards.forEach((card) => {
+        card.addEventListener("click", () => {
+          const nextIndex = slides.findIndex((slide) => slide.dataset.slide === card.dataset.platformCard);
+          setActiveSlide(nextIndex, nextIndex < activeSlide ? "prev" : "next");
+          document.getElementById("download-stage")?.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (document.getElementById("external-link-dialog")?.open) {
+          return;
+        }
+
+        if (event.key === "ArrowLeft") {
+          setActiveSlide(activeSlide - 1, "prev");
+        }
+
+        if (event.key === "ArrowRight") {
+          setActiveSlide(activeSlide + 1, "next");
+        }
+      });
+
+      if (footerYear) {
+        footerYear.textContent = `© ${new Date().getFullYear()} Shell++`;
+      }
+    </script>
+  </body>
+</html>
