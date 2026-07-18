@@ -4,6 +4,15 @@ import "../styles/global.css";
 const base = import.meta.env.BASE_URL;
 const basePath = base.endsWith("/") ? base : `${base}/`;
 const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
+const releasePageUrl = "https://github.com/Shellplusplus/Shellplusplus/releases/latest";
+const androidDownloadUrl =
+  "https://github.com/Shellplusplus/Shellplusplus/releases/download/1.0.1/apk-app-release.apk";
+const watchRpkDownloadUrl =
+  "https://github.com/Shellplusplus/Shellplusplus/releases/download/1.0.1/rpk-com.shell.liangyi.release.1.0.0.rpk";
+const watchLuaDownloadUrl =
+  "https://github.com/Shellplusplus/Shellplusplus/releases/download/1.0.1/lua-resource.bin";
+const pluginDownloadUrl =
+  "https://github.com/Shellplusplus/Shellplusplus/releases/download/1.0.1/plugin-Shell--.abp";
 ---
 
 <!DOCTYPE html>
@@ -46,10 +55,11 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
         </nav>
         <a
           class="icon-button github-link"
-          href="https://github.com/DefateStar/public-shellpp/releases/latest"
+          href={releasePageUrl}
           target="_blank"
           rel="noreferrer"
           aria-label="打开最新版本发布页"
+          data-release-link="release-page"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true" class="github-mark">
             <path
@@ -97,9 +107,10 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
                   <section class="download-action-panel">
                     <span class="label">Download</span>
                     <div class="download-link-stack">
-                      <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">Android 端</a>
-                      <a class="line-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">手环端</a>
-                      <a class="line-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">AstroBox 插件</a>
+                      <a class="primary-action" href={androidDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="android">Android 端</a>
+                      <a class="line-action" href={watchRpkDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="watch-rpk">手环端 RPK</a>
+                      <a class="line-action" href={watchLuaDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="watch-lua">手环端 Lua 资源</a>
+                      <a class="line-action" href={pluginDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="plugin">AstroBox 插件</a>
                     </div>
                   </section>
                 </div>
@@ -122,7 +133,7 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
                     <span class="label">Download</span>
                     <h3>下载 Android APK</h3>
                     <p>前往最新 Release 下载 Android 安装包，并查看本次版本说明。</p>
-                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                    <a class="primary-action" href={androidDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="android">下载 APK</a>
                   </section>
                 </div>
               </article>
@@ -144,7 +155,10 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
                     <span class="label">Download</span>
                     <h3>下载手环端包</h3>
                     <p>从最新 Release 获取手环端资源，配合 Android 端完成安装和连接。</p>
-                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                    <div class="download-link-stack">
+                      <a class="primary-action" href={watchRpkDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="watch-rpk">下载 RPK</a>
+                      <a class="line-action" href={watchLuaDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="watch-lua">下载 Lua 资源</a>
+                    </div>
                   </section>
                 </div>
               </article>
@@ -165,7 +179,7 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
                     <span class="label">Download</span>
                     <h3>下载 AstroBox 插件</h3>
                     <p>从最新 Release 获取插件资源，适合开发和桌面维护流程。</p>
-                    <a class="primary-action" href="https://github.com/DefateStar/public-shellpp/releases/latest" target="_blank" rel="noreferrer">打开最新版本</a>
+                    <a class="primary-action" href={pluginDownloadUrl} target="_blank" rel="noreferrer" data-release-asset="plugin">下载插件</a>
                   </section>
                 </div>
               </article>
@@ -282,6 +296,14 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
       const disclaimerHome = disclaimerDialog?.querySelector("[data-disclaimer-home]");
       const disclaimerStorageKey = "shellpp-download-disclaimer-accepted-v2";
       const disclaimerDelayMs = 5000;
+      const releaseApiUrl = "https://api.github.com/repos/Shellplusplus/Shellplusplus/releases/latest";
+      const releaseAssetMatchers = {
+        android: (name) => name === "apk-app-release.apk" || /^apk-.*release.*\.apk$/i.test(name),
+        "watch-rpk": (name) =>
+          name === "rpk-com.shell.liangyi.release.1.0.0.rpk" || /^rpk-com\.shell\.liangyi.*\.rpk$/i.test(name),
+        "watch-lua": (name) => name === "lua-resource.bin",
+        plugin: (name) => name === "plugin-Shell--.abp" || /^plugin-Shell.*\.abp$/i.test(name),
+      };
       let disclaimerReadProgress = 0;
       let disclaimerCountdownStarted = false;
       let disclaimerCountdownFinished = false;
@@ -341,6 +363,61 @@ const withBase = (path: string) => `${basePath}${path.replace(/^\/+/, "")}`;
       const initialTheme = storedTheme || (prefersDark.matches ? "dark" : "light");
       applyTheme(initialTheme);
       setActiveSlide(activeSlide, "none");
+
+      async function hydrateReleaseDownloads() {
+        const assetLinks = Array.from(document.querySelectorAll("[data-release-asset]"));
+        const releaseLinks = Array.from(document.querySelectorAll("[data-release-link='release-page']"));
+
+        if (!assetLinks.length) {
+          return;
+        }
+
+        try {
+          const response = await fetch(releaseApiUrl, {
+            headers: {
+              Accept: "application/vnd.github+json",
+            },
+          });
+
+          if (!response.ok) {
+            throw new Error(`GitHub Release API returned ${response.status}`);
+          }
+
+          const release = await response.json();
+          const assets = Array.isArray(release.assets) ? release.assets : [];
+          const resolvedAssets = Object.fromEntries(
+            Object.entries(releaseAssetMatchers).map(([key, matcher]) => [
+              key,
+              assets.find((asset) => typeof asset.name === "string" && matcher(asset.name)),
+            ]),
+          );
+
+          releaseLinks.forEach((link) => {
+            if (link instanceof HTMLAnchorElement && release.html_url) {
+              link.href = release.html_url;
+            }
+          });
+
+          assetLinks.forEach((link) => {
+            if (!(link instanceof HTMLAnchorElement)) {
+              return;
+            }
+
+            const assetKey = link.dataset.releaseAsset;
+            const asset = assetKey ? resolvedAssets[assetKey] : null;
+            if (!asset?.browser_download_url) {
+              return;
+            }
+
+            link.href = asset.browser_download_url;
+            link.title = `${release.name || release.tag_name || "最新 Release"} / ${asset.name}`;
+          });
+        } catch (error) {
+          console.warn("Shell++ release links are using fallback URLs.", error);
+        }
+      }
+
+      hydrateReleaseDownloads();
 
       function closeDisclaimerDialog() {
         if (!(disclaimerDialog instanceof HTMLDialogElement) || !disclaimerDialog.open) {
